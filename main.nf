@@ -24,6 +24,8 @@ This pipeline will run bbmap.sh on a set of fastq files in a baseDir and produce
                  launchDir     : ${launchDir}
                  fastqInputDir : ${params.fastq_input}
                  outdir        : ${params.outdir}
+                 target_depth = ${params.target_depth}
+                 min_depth = ${params.min_depth}
                  """
                  .stripIndent()
 
