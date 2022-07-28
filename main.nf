@@ -1,18 +1,12 @@
 #!/usr/bin/env nextflow
 
-/*
- *   A nextflow wrapper for running bbmap.sh
- *   -----------------------------------------
-
- == V1  ==
-This pipeline will run bbmap.sh on a set of fastq files in a baseDir and produce a set of normalized fq.gz files for analysis
-
- */
 
  import java.time.LocalDateTime
 
+//enable dsl2
  nextflow.enable.dsl = 2
 
+// include modules
  include { bbmap } from './modules/bbmap.nf'
 
 // prints to the screen and to the log
@@ -29,7 +23,7 @@ This pipeline will run bbmap.sh on a set of fastq files in a baseDir and produce
                  """
                  .stripIndent()
 
-
+// main workflow
 workflow {
      ch_start_time = Channel.of(LocalDateTime.now())
      ch_pipeline_name = Channel.of(workflow.manifest.name)
