@@ -5,7 +5,7 @@ process bbmap {
     publishDir "${params.outdir}/", mode:'copy'
 
     input:
-    tuple val(sample_id), path(reads_1), path(reads_2), path(adapters)
+    tuple val(sample_id), path(reads_1), path(reads_2)
 
     output:
     tuple val(sample_id), path("${sample_id}_R1.trim.fastq.gz"), path("${sample_id}_R2.trim.fastq.gz"), emit: normalized_reads
@@ -13,8 +13,6 @@ process bbmap {
 
     script:
     """
-    //printf -- "- process_name: fastp\\n" > ${sample_id}_fastp_provenance.yml
-    //printf -- "  tool_name: fastp\\n  tool_version: \$(fastp --version 2>&1 | cut -d ' ' -f 2)\\n" >> ${sample_id}_fastp_provenance.yml
     bbnorm.sh \
       in=${sample_id}_R1.trim.fastq.gz \
       in2=${sample_id}_R2.trim.fastq.gz \
